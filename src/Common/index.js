@@ -1,0 +1,1 @@
+export { default as FooterComponents } from './components/FooterComponents';
