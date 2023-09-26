@@ -1,0 +1,1 @@
+export { default as TimeBasedGreenting } from "./Components/TimeBasedGreenting";

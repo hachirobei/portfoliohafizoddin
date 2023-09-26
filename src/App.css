@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  .font-outline-1 {
+    -webkit-text-stroke: 1px black;
+  }
+}
+
 .App {
   text-align: center;
 }
