@@ -1,23 +1,23 @@
 import './App.css';
+import React, {useRef} from 'react';
 import { FooterComponents,NavbarComponents } from './Common';
+import { AboutComponents, HomeComponents } from './Module';
+
 
 function App() {
+  const homeRef =useRef(null);
+  const aboutRef =useRef(null);
   return (
-    <div>
-        <NavbarComponents/>
-          <div className="container mx-auto bg-gray-200 rounded-xl shadow border p-8 m-10">
-      
-          <p className="text-3xl text-gray-700 font-bold mb-5">
-            Welcome!
-          </p>
-          <p className="text-gray-500 text-lg">
-            React and Tailwind CSS in action
-          </p>
-
-          
+        <div>
+          <NavbarComponents homeRef={homeRef} aboutRef={aboutRef}/>
+          <div ref={homeRef}>
+            <HomeComponents />
+          </div>
+          <div ref={aboutRef}>
+            <AboutComponents />
+          </div>
+          <FooterComponents/>
         </div>
-        <FooterComponents/>
-    </div>
 
 
   );
