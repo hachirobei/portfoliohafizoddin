@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { LogoComponents } from "../../assets/icons/"; 
 
-const NavbarComponents = ({homeRef,aboutRef}) => {
+const NavbarComponents = ({homeRef,aboutRef,experienceRef,educationRef}) => {
 
     const [activeSection,setActiveSection] = useState('home');
     
@@ -28,6 +28,24 @@ const NavbarComponents = ({homeRef,aboutRef}) => {
         });
     };
 
+    const scrollToExperience = () => {
+        setActiveSection('experience');
+        
+        experienceRef.current.scrollIntoView({
+            behavior: 'smooth'
+        });
+    };
+
+
+    const scrollToEducation = () => {
+        setActiveSection('education');
+        
+        educationRef.current.scrollIntoView({
+            behavior: 'smooth'
+        });
+    };
+
+
 
 
     return (
@@ -47,18 +65,18 @@ const NavbarComponents = ({homeRef,aboutRef}) => {
                 </div>
                 
                 <div className={`${isCollapsed ? 'hidden' : ''} items-center justify-between w-full md:flex md:w-auto md:order-1`} id="navbar-cta">
-                    <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-neutral-950">
+                    <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-neutral-950 md:dark:bg-neutral-950">
                         <li>
-                            <button onClick={scrollToHome} className={`block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0 md:hover:dark:text-amber-300  dark:text-white dark:hover:text-white md:dark:hover:bg-transparent ${activeSection === 'home' ? ' md:dark:text-amber-300 ' : 'text-gray-900 hover:bg-neutral-950'}`}>Home </button>
+                            <a href="#" onClick={(e) => { e.preventDefault(); scrollToHome(); }} className={`block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-amber-300 md:bg-transparent md:p-0 md:hover:dark:text-amber-300 md:dark:hover:dark:text-amber-300 dark:text-white dark:hover:text-white md:dark:hover:bg-transparent ${activeSection === 'home' ? ' md:dark:text-amber-300 ' : 'text-gray-900 hover:bg-neutral-950'}`}>Home</a>
                         </li>
                         <li>
-                            <button onClick={scrollToAbout} className={`block py-2 pl-3 pr-4 rounded md:hover:bg-transparent md:hover:dark:text-amber-300 md:p-0 md:dark:hover:dark:text-amber-300 dark:text-white dark:hover:text-white md:dark:hover:bg-transparent ${activeSection === 'about' ?  'md:dark:text-amber-300' : 'text-gray-900 hover:bg-neutral-950'}`}>About</button>
+                            <a href="#" onClick={(e) => { e.preventDefault(); scrollToAbout(); }} className={`block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-amber-300 md:bg-transparent md:p-0 md:hover:dark:text-amber-300 md:dark:hover:dark:text-amber-300 dark:text-white dark:hover:text-white md:dark:hover:bg-transparent ${activeSection === 'about' ? 'md:dark:text-amber-300' : 'text-gray-900 hover:bg-neutral-950'}`}>About</a>
                         </li>
                         <li>
-                            <a href="#" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:dark:text-amber-300 md:p-0 md:dark:hover:dark:text-amber-300 dark:text-white dark:hover:text-white md:dark:hover:bg-transparent" aria-current={activeSection ==='experience' ? 'page' : null}>Experience</a>
+                            <a href="#" onClick={(e) => { e.preventDefault(); scrollToExperience(); }} className={`block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-amber-300 md:bg-transparent md:p-0 md:hover:dark:text-amber-300 md:dark:hover:dark:text-amber-300 dark:text-white dark:hover:text-white md:dark:hover:bg-transparent ${activeSection === 'experience' ? 'md:dark:text-amber-300' : 'text-gray-900 hover:bg-neutral-950'}`}>Experience</a>
                         </li>
                         <li>
-                            <a href="#" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:dark:text-amber-300 md:p-0 md:dark:hover:dark:text-amber-300 dark:text-white  dark:hover:text-white md:dark:hover:bg-transparent" aria-current={activeSection ==='education' ? 'page' : null}>Education</a>
+                            <a href="#" onClick={(e) => { e.preventDefault(); scrollToEducation(); }} className={`block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-amber-300 md:bg-transparent md:p-0 md:hover:dark:text-amber-300 md:dark:hover:dark:text-amber-300 dark:text-white dark:hover:text-white md:dark:hover:bg-transparent ${activeSection === 'education' ? 'md:dark:text-amber-300' : 'text-gray-900 hover:bg-neutral-950'}`}>Education</a>
                         </li>
                     </ul>
                 </div>
