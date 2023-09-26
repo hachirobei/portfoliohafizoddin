@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { LogoComponents } from "../../assets/icons/"; 
+import { LogoComponents } from "../../assets/icons"; 
 
-const NavbarComponents = ({homeRef,aboutRef,experienceRef,educationRef}) => {
+const NavbarComponents = ({homeRef,aboutRef,experienceRef,educationRef, skillRef}) => {
 
     const [activeSection,setActiveSection] = useState('home');
     
@@ -45,6 +45,14 @@ const NavbarComponents = ({homeRef,aboutRef,experienceRef,educationRef}) => {
         });
     };
 
+    const scrollToSkill = () => {
+        setActiveSection('skill');
+        
+        skillRef.current.scrollIntoView({
+            behavior: 'smooth'
+        });
+    };
+
 
 
 
@@ -71,6 +79,9 @@ const NavbarComponents = ({homeRef,aboutRef,experienceRef,educationRef}) => {
                         </li>
                         <li>
                             <a href="#" onClick={(e) => { e.preventDefault(); scrollToAbout(); }} className={`block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-amber-300 md:bg-transparent md:p-0 md:hover:dark:text-amber-300 md:dark:hover:dark:text-amber-300 dark:text-white dark:hover:text-white md:dark:hover:bg-transparent ${activeSection === 'about' ? 'md:dark:text-amber-300' : 'text-gray-900 hover:bg-neutral-950'}`}>About</a>
+                        </li>
+                        <li>
+                            <a href="#" onClick={(e) => { e.preventDefault(); scrollToSkill(); }} className={`block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-amber-300 md:bg-transparent md:p-0 md:hover:dark:text-amber-300 md:dark:hover:dark:text-amber-300 dark:text-white dark:hover:text-white md:dark:hover:bg-transparent ${activeSection === 'skill' ? 'md:dark:text-amber-300' : 'text-gray-900 hover:bg-neutral-950'}`}>Skill</a>
                         </li>
                         <li>
                             <a href="#" onClick={(e) => { e.preventDefault(); scrollToExperience(); }} className={`block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-amber-300 md:bg-transparent md:p-0 md:hover:dark:text-amber-300 md:dark:hover:dark:text-amber-300 dark:text-white dark:hover:text-white md:dark:hover:bg-transparent ${activeSection === 'experience' ? 'md:dark:text-amber-300' : 'text-gray-900 hover:bg-neutral-950'}`}>Experience</a>

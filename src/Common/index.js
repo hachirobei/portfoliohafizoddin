@@ -1,2 +1,3 @@
-export { default as FooterComponents } from './components/FooterComponents';
-export { default as NavbarComponents } from './components/NavbarComponents';
+export { default as FooterComponents } from './Footer/FooterComponents';
+export { default as NavbarComponents } from './Navbar/NavbarComponents';
+export { default as PartitionComponents } from './Partition/PartitionComponents'

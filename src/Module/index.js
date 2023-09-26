@@ -1,4 +1,5 @@
-export { default as AboutComponents } from "./Components/AboutComponents";
-export { default as HomeComponents } from "./Components/HomeComponents";
-export { default as ExperienceComponents } from "./Components/ExperienceComponents";
-export { default as EducationComponents } from "./Components/EducationComponents";
+export { default as AboutComponents } from "./About/AboutComponents";
+export { default as HomeComponents } from "./Home/HomeComponents";
+export { default as ExperienceComponents } from "./Experience/ExperienceComponents";
+export { default as EducationComponents } from "./Education/EducationComponents";
+export { default as SkillComponents } from "./Skill/SkillComponents";
