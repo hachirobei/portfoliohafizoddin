@@ -1,0 +1,75 @@
+export const experiencesData = [
+    {
+      title: "Senior Full-stack Developer",
+      company: "Nippon Paint Malaysia",
+      type: "Full-time",
+      startDate: "2023-08-02",
+      endDate: "Present",
+      location: "Shah Alam, Selangor, Malaysia · On-site",
+      description: [
+        "Collaborate with cross-functional teams to understand project requirements and translate them into technical solutions.",
+        "Design and implement responsive, user-friendly front-end interfaces using modern web technologies.",
+        "Develop and maintain robust back-end systems, ensuring scalability, security, and high performance.",
+        "Mentor and guide junior developers, conducting code reviews to maintain code quality and best practices.",
+        "Contribute to the improvement of development processes and tools, fostering an agile and collaborative environment.",
+        "Stay up-to-date with industry trends and emerging technologies, applying them to enhance our product offerings.",
+        "Participate in team discussions, brainstorming sessions, and provide technical expertise to achieve project goals."
+      ],
+    },
+    {
+      title: "Software Developer",
+      company: "TIME dotCom Berhad",
+      type: "Full-time",
+      startDate: "2018-08-18",
+      endDate: "2023-08-01",
+      location: "Shah Alam",
+      description: [
+        "Revised, modularized and updated old code bases to modern development standards, reducing operating costs, and improving functionality.",
+        "Collaborated on stages of systems development lifecycle from requirement gathering to production releases.",
+        "Collaborated with project managers to select ambitious, but realistic coding milestones on pre-release software project development.",
+        "Designed customized solutions for proposals to potential customers.",
+        "Updated old code bases to modern development standards, improving functionality.",
+        "Documented technical workflows and knowledge to educate newly hired employees.",
+        "Discussed issues with team members to provide resolution and apply best practices.",
+        "Tuned systems to boost performance.",
+        "Contributed ideas and suggestions in team meetings and delivered updates on deadlines, designs, and enhancements."
+      ],
+    },
+    {
+      title: "Freelance Programmer",
+      company: "Self-employed",
+      type: "Freelance",
+      startDate: "2014-05-01",
+      endDate: "2018-08-01",
+      location: "SERI KEMBANGAN",
+      description: [
+        "Worked with software development and testing, design and develop robust solutions to meet client requirements for functionality, scalability, and performance.",
+        "Prepared detailed reports on updates to project specifications, progress, identified conflicts, and team activities.",
+        "Developed web applications for deployment on platforms and sites.",
+        "Utilized both agile and waterfall methodologies to develop software of varying complexity and business needs.",
+        "Debugged problems caused by hardware, operating systems software, application programs, and network failures.",
+        "Created databases, data entry systems, web forms, and other applications for diverse uses.",
+        "Wrote and maintained technical documentation for software applications."
+      ],
+    },
+    {
+      title: "Junior System Engineer",
+      company: "HeiTech Padu Berhad",
+      type: "Full-time",
+      startDate: "2016-09-01",
+      endDate: "2017-08-31",
+      location: "Selangor, Malaysia",
+      description: [
+        "Streamlined troubleshooting processes to improve system support and enhance communication between support team and end-users.",
+        "Proposed technical feasibility solutions for new system designs and suggested options for performance improvement of technical components.",
+        "Researched software and systems products to determine purchase recommendations.",
+        "Conducted end-user reviews for modified and new systems.",
+        "Created system design models and specifications to support system programmers and development teams.",
+        "Integrated database and backup servers into enterprise systems.",
+        "Configured, installed, and upgraded SQL databases.",
+        "Maintained stability, integrity, and efficient operation of information systems supporting organizational functions.",
+        "Documented system configuration, mapping, and processes.",
+        "Created flowcharts, diagrams, and other documentation."
+      ],
+    },
+];

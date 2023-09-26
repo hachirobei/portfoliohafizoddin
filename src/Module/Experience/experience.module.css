@@ -1,0 +1,65 @@
+
+.icon {
+    transition: transform 0.3s ease;
+    color: #FFA500; /* Yellow */
+}
+
+.expanded .icon {
+    transform: rotate(180deg);
+}
+
+.experience-section {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.experience-item {
+    margin-bottom: 30px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.experience-item:hover {
+    transform: translateY(-5px);
+    background-color: #FFEBAA;  /* Lighter yellow for hover */
+}
+
+.experience-header {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.experience-header:hover {
+    background-color: #FFEBAA;  /* Lighter yellow for hover */
+    color: #000000;
+}
+
+.experience-header h3 {
+    color: #FFA500;  /* Orange */
+    margin-bottom: 15px;
+}
+
+.experience-header .flex {
+    align-items: center;
+    gap: 10px;
+}
+
+.text-amber-300 {
+    color: #FFC107;  /* Regular amber for icons */
+}
+
+.experience-body {
+    background-color: #fafafa;  /* Lighter shade for the description */
+    border-top: 1px solid #e0e0e0;
+    border-radius: 0 0 8px 8px;
+    padding: 15px 20px;
+    margin-top: 0;   /* Since it's part of the card now */
+    transition: all 0.3s ease-in-out;
+}

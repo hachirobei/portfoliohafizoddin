@@ -8,10 +8,11 @@ th, td {
     border: 1px solid #e0e0e0;
     padding: 8px 12px;
     text-align: left;
+    background-color: #ffffff;
 }
 
 th {
-    background-color: #f5f5f5;
+    background-color: #ffffff;
 }
 
 .progress-bar {
@@ -65,4 +66,64 @@ td:hover {
     to {
         opacity: 1;
     }
+}
+
+.tooltip-container {
+    /* Add your tooltip container styles here */
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+
+/* Tooltip arrow styles */
+.tooltip-arrow {
+    /* Add your tooltip arrow styles here */
+    border: 6px solid transparent;
+    border-bottom-color: #ffffff;
+}
+
+.low {
+    background-color: #ff7f7f; /* light red for low proficiency */
+}
+
+.medium {
+    background-color: #ffa500; /* bright orange for medium proficiency */
+}
+
+.high {
+    background-color: #1e90ff; /* bright blue for high proficiency */
+}
+
+.very-high {
+    background-color: #800080; /* rich purple for very high proficiency */
+}
+
+
+/* Default styles for mobile-first design: */
+.table {
+    width: 100%;
+}
+
+/* When the screen is 768 pixels and up (e.g., tablets), 
+   display the skills in two columns: */
+@media (min-width: 768px) {
+    .flex {
+        flex-wrap: wrap;
+    }
+}
+
+/* When the screen is 1024 pixels and up (e.g., desktops), 
+   display the skills in four columns: */
+@media (min-width: 1024px) {
+    .flex {
+        flex-direction: row;
+    }
+}
+
+.skill-section {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: all 0.3s ease-in-out;
 }

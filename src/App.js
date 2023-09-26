@@ -29,10 +29,13 @@ function App() {
           <div ref={experienceRef}>
             <ExperienceComponents />
           </div>
+          <PartitionComponents/>
           <div ref={educationRef}>
             <EducationComponents />
           </div>
+          <div className="pt-10">
           <FooterComponents/>
+          </div>
         </div>
 
 

@@ -5,16 +5,6 @@ import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import styles from './about.module.css';
 
-// Function to calculate age
-function calculateAge(birthdate) {
-    const birthDate = new Date(birthdate);
-    const currentDate = new Date();
-    const age = currentDate.getFullYear() - birthDate.getFullYear();
-    if (currentDate.getMonth() < birthDate.getMonth() || (currentDate.getMonth() === birthDate.getMonth() && currentDate.getDate() < birthDate.getDate())) {
-        return age - 1;
-    }
-    return age;
-}
 
 // Function to calculate age
 function calculateExperience(startYear) {
@@ -34,17 +24,15 @@ const fadeIn = {
     visible: { opacity: 1 }
 };
 
-const AboutComponents = ({ birthdate = "1993-07-23" , startYear = 2015}) => {
-    const age = calculateAge(birthdate);
+const AboutComponents = ({ startYear = 2015}) => {
     const experienceYears = calculateExperience(startYear);
     const [ref, inView] = useInView({
         triggerOnce: true,
         threshold: 0.1
     });
-    const currentYear = new Date().getFullYear();
+
     const previousCompanyName = "Time DotCom Sdn Bhd"; 
     const previousPosition = "Software Developer"; 
-    const previousIndustry = "Telecommunications"; 
     const companyName = "Nippon Paint (M) Sdn Bhd"; 
     const currentPosition = "Senior FullStack Developer"; 
     const currentIndustry = "Manufacturing";
@@ -60,6 +48,7 @@ const AboutComponents = ({ birthdate = "1993-07-23" , startYear = 2015}) => {
             <h2 className="text-5xl py-2 text-amber-300 font-medium dark:text-amber-400 md:text-6xl">
                 About Me
             </h2>
+            <div className={styles["about-section"]}>
             <h3 className="text-2xl py-2 dark:text-black md:text-3xl">
                 {currentPosition}
             </h3>
@@ -79,6 +68,7 @@ const AboutComponents = ({ birthdate = "1993-07-23" , startYear = 2015}) => {
                 <SocialLink Icon={AiFillTwitterCircle} link="https://twitter.com/yourtwitter" />
                 <SocialLink Icon={AiFillLinkedin} link="https://www.linkedin.com/in/muhammad-hafizoddin-roslan-538a67bb/" />
                 <SocialLink Icon={AiFillYoutube} link="https://youtube.com/youryoutube" />
+            </div>
             </div>
         </motion.div>
     );
