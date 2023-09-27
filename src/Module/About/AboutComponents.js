@@ -1,5 +1,5 @@
 import React from "react";
-import { AiFillTwitterCircle, AiFillLinkedin, AiFillYoutube } from "react-icons/ai";
+import { AiFillTwitterCircle, AiFillLinkedin, AiFillYoutube, AiFillGithub } from "react-icons/ai";
 import { FaRegEnvelope } from "react-icons/fa";
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
@@ -69,6 +69,7 @@ const AboutComponents = ({ startYear = 2015}) => {
                     <SocialLink Icon={AiFillTwitterCircle} link="https://twitter.com/yourtwitter" />
                     <SocialLink Icon={AiFillLinkedin} link="https://www.linkedin.com/in/muhammad-hafizoddin-roslan-538a67bb/" />
                     <SocialLink Icon={AiFillYoutube} link="https://www.youtube.com/channel/UC4mcOv8c8o_ccjHN-BzOSfw" />
+                    <SocialLink Icon={AiFillGithub} link="https://github.com/hachirobei" />
                 </div>
             </div>
             </div>
