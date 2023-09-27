@@ -63,7 +63,7 @@ const AboutComponents = ({ startYear = 2015}) => {
 
                 If you're on the lookout for a tech expert who can propel your projects to new heights, look no further! Let's have a conversation, brainstorm ideas, and explore how I can add a touch of creativity to Nippon Paint (M) Sdn Bhd's exciting journey ahead. And hey, if you're in need of a Full-stack Developer who excels in both front-end and back-end development, I'm your go-to person! 🎨<br /><br />
             </p>
-            <div className="flex flex-wrap justify-center gap-6 py-3 text-5xl">
+            <div className="flex flex-wrap justify-center gap-6 py-3 text-5xl  text-amber-300 dark:text-amber-300">
                 <div className="flex flex-col items-center md:flex-row md:gap-16">
                     <SocialLink Icon={FaRegEnvelope} link="mailto:hachirobei93@gmail.com" />
                     <SocialLink Icon={AiFillTwitterCircle} link="https://twitter.com/yourtwitter" />
