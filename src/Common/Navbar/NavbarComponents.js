@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { LogoComponents } from "../../assets/icons"; 
 
-const NavbarComponents = ({homeRef,aboutRef,experienceRef,educationRef, skillRef}) => {
+const NavbarComponents = ({homeRef,aboutRef,experienceRef,educationRef, skillRef, projectRef}) => {
 
     const [activeSection,setActiveSection] = useState('home');
     
@@ -53,6 +53,14 @@ const NavbarComponents = ({homeRef,aboutRef,experienceRef,educationRef, skillRef
         });
     };
 
+    const scrollToProject = () => {
+        setActiveSection('project');
+        
+        projectRef.current.scrollIntoView({
+            behavior: 'smooth'
+        });
+    };
+
 
 
 
@@ -88,6 +96,9 @@ const NavbarComponents = ({homeRef,aboutRef,experienceRef,educationRef, skillRef
                         </li>
                         <li>
                             <a href="/" onClick={(e) => { e.preventDefault(); scrollToEducation(); }} className={`block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-amber-300 md:bg-transparent md:p-0 md:hover:dark:text-amber-300 md:dark:hover:dark:text-amber-300 dark:text-white dark:hover:text-white md:dark:hover:bg-transparent ${activeSection === 'education' ? 'md:dark:text-amber-300' : 'text-gray-900 hover:bg-neutral-950'}`}>Education</a>
+                        </li>
+                        <li>
+                            <a href="/" onClick={(e) => { e.preventDefault(); scrollToProject(); }} className={`block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-amber-300 md:bg-transparent md:p-0 md:hover:dark:text-amber-300 md:dark:hover:dark:text-amber-300 dark:text-white dark:hover:text-white md:dark:hover:bg-transparent ${activeSection === 'project' ? 'md:dark:text-amber-300' : 'text-gray-900 hover:bg-neutral-950'}`}>Project</a>
                         </li>
                     </ul>
                 </div>

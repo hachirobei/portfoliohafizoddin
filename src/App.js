@@ -1,7 +1,7 @@
 import './App.css';
 import React, {useRef} from 'react';
 import { FooterComponents,NavbarComponents,PartitionComponents } from './Common';
-import { AboutComponents, HomeComponents, ExperienceComponents, EducationComponents , SkillComponents} from './Module';
+import { AboutComponents, HomeComponents, ExperienceComponents, EducationComponents , SkillComponents, ProjectComponents} from './Module';
 
 
 function App() {
@@ -10,10 +10,11 @@ function App() {
   const experienceRef =useRef(null);
   const educationRef =useRef(null);
   const skillRef =useRef(null);
+  const projectRef =useRef(null);
 
   return (
         <div>
-          <NavbarComponents homeRef={homeRef} aboutRef={aboutRef} experienceRef={experienceRef} educationRef={educationRef} skillRef={skillRef} />
+          <NavbarComponents homeRef={homeRef} aboutRef={aboutRef} experienceRef={experienceRef} educationRef={educationRef} skillRef={skillRef} projectRef={projectRef} />
           <div ref={homeRef}>
             <HomeComponents />
           </div>
@@ -32,6 +33,10 @@ function App() {
           <PartitionComponents/>
           <div ref={educationRef}>
             <EducationComponents />
+          </div>
+          <PartitionComponents/>
+          <div ref={projectRef}>
+            <ProjectComponents />
           </div>
           <div className="pt-10">
           <FooterComponents/>

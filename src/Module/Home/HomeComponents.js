@@ -11,16 +11,7 @@ const fadeIn = {
 const HomeComponents = () => {
     return (
         <div className="relative">
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-amber-300 bg-gradient-to-t from-black/60 to-transparent">
-                <motion.h1 
-                    initial="hidden"
-                    animate="visible"
-                    variants={fadeIn}
-                    className="text-3xl sm:text-4xl md:text-5xl lg:text-[40px] font-extrabold shadow-amber-600/50 drop-shadow-lg pb-4"
-                >
-                    <TimeBasedGreenting /><br />Welcome to My Portfolio
-                </motion.h1>
-            </div>
+
             <motion.img 
                 src={hafizoddinImage} 
                 className="object-cover w-full transition-transform transform hover:scale-105" 
@@ -28,6 +19,17 @@ const HomeComponents = () => {
                 initial={{ opacity: 0.8 }}
                 whileHover={{ opacity: 1 }}
             />
+
+<div className=" inset-0 flex flex-col items-center justify-center text-center text-amber-300 bg-gradient-to-t to-transparent">
+                <motion.h1 
+                    initial="hidden"
+                    animate="visible"
+                    variants={fadeIn}
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-[40px] font-extrabold shadow-amber-600/50 drop-shadow-lg pb-1"
+                >
+                    <TimeBasedGreenting /><br />Welcome to My Portfolio
+                </motion.h1>
+            </div>
         </div>
     );
 }
