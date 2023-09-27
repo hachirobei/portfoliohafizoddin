@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { experiencesData } from "./Data/ExperienceData";
 import styles from './experience.module.css';
-import { FaCalendar, FaMapMarkerAlt, FaBriefcase, FaAngleDown, FaAngleUp, FaCircle } from 'react-icons/fa';
+import { FaCalendar, FaMapMarkerAlt, FaBriefcase, FaAngleDown, FaCircle } from 'react-icons/fa';
 
 function calculateDuration(startDate, endDate) {
     const start = new Date(startDate);
