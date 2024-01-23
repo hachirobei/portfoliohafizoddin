@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import styles from './skill.module.css';
 import { skills } from './Data/skillData';
-
+import { motion } from 'framer-motion';
 
 
 function SkillComponents() {
     const [activeTooltip, setActiveTooltip] = useState(null);
 
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    const progressBarVariants = {
+        initial: { width: 0 },
+        animate: proficiency => ({ width: `${proficiency}%`, transition: { duration: 1 } })
+    };
 
     useEffect(() => {
         function handleResize() {
@@ -52,26 +57,29 @@ function SkillComponents() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {skills.slice(colIndex * skillsPerColumn, (colIndex + 1) * skillsPerColumn).map(skill => (
-                                    <tr key={skill.name}>
-                                        <td>{skill.name}</td>
-                                        <td
-                                            onClick={() => handleSkillClick(skill.name)}
-                                            className={styles.skillCell}
-                                        >
-                                            <div 
-                                                className={`${styles["progress-bar"]} ${styles[getColorClass(skill.proficiency)]}`}
-                                                style={{ width: `${skill.proficiency}%` }}
-                                            ></div>
-                                            {activeTooltip === skill.name && (
-                                                <div className={styles.tooltip}>
-                                                 {skill.proficiency}%
-                                                </div>
-                                            )}
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
+                                    {skills.slice(colIndex * skillsPerColumn, (colIndex + 1) * skillsPerColumn).map(skill => (
+                                        <tr key={skill.name}>
+                                            <td>{skill.name}</td>
+                                            <td
+                                                onClick={() => handleSkillClick(skill.name)}
+                                                className={styles.skillCell}
+                                            >
+                                                <motion.div 
+                                                    className={`${styles["progress-bar"]} ${styles[getColorClass(skill.proficiency)]}`}
+                                                    variants={progressBarVariants}
+                                                    initial="initial"
+                                                    animate="animate"
+                                                    custom={skill.proficiency}
+                                                ></motion.div>
+                                                {activeTooltip === skill.name && (
+                                                    <div className={styles.tooltip}>
+                                                        {skill.proficiency}%
+                                                    </div>
+                                                )}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
                         </table>
                     </div>
                 ))}

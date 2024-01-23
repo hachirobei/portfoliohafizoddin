@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { experiencesData } from "./Data/ExperienceData";
 import styles from './experience.module.css';
-import { FaCalendar, FaMapMarkerAlt, FaBriefcase, FaAngleDown, FaCircle } from 'react-icons/fa';
+import { FaCalendar, FaMapMarkerAlt, FaBriefcase, FaAngleDown } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
 
 function calculateDuration(startDate, endDate) {
     const start = new Date(startDate);
@@ -30,20 +31,26 @@ function calculateDuration(startDate, endDate) {
 
     return result.trim();
 }
+
+
 function ExperienceComponents() {
     const [activeIndex, setActiveIndex] = useState(null);
 
+    const toggleDetails = (index) => {
+        setActiveIndex(index === activeIndex ? null : index);
+    };
+
     return (
-        <div className=" p-2 py-2 px-10 pb-10">
+        <div className="p-2 py-2 px-10 pb-10">
             <h2 className="text-5xl text-center py-2 text-amber-300 font-medium dark:text-amber-400 md:text-6xl">
                 Experience
             </h2>
             <div className={styles["experience-section"]}>
                 {experiencesData.map((exp, index) => (
                     <div key={index} className={styles["experience-item"]}>
-                       <div 
+                        <div 
                             className={`${styles["experience-header"]} cursor-pointer shadow-md hover:shadow-lg transition-shadow duration-300`} 
-                            onClick={() => setActiveIndex(index === activeIndex ? null : index)}
+                            onClick={() => toggleDetails(index)}
                         >
                             <h3 className="text-2xl mb-3">{exp.title}</h3>
                             <div className="flex items-center mb-2">
@@ -55,24 +62,30 @@ function ExperienceComponents() {
                                 {exp.location}
                             </div>
                             <div className="flex items-center mb-2">
-                                <FaCircle className="mr-2 text-amber-300" />
-                                {exp.type}
-                            </div>
-                            <div className="flex items-center mb-2">
                                 <FaCalendar className="mr-2 text-amber-300" />
                                 {calculateDuration(exp.startDate, exp.endDate)}
                             </div>
-                            <div className={activeIndex === index ? styles.expanded : ""}>
-                                <FaAngleDown className={styles.icon} />
-                            </div>
+                            <motion.div 
+                                className={styles.icon} 
+                                animate={{ rotate: activeIndex === index ? 180 : 0 }}
+                            >
+                                <FaAngleDown />
+                            </motion.div>
                         </div>
-                        {activeIndex === index && (
-                            <div className={styles["experience-body"]}>
-                                {exp.description.map((desc, i) => (
-                                    <p key={i} className="mb-2">{desc}</p>
-                                ))}
-                            </div>
-                        )}
+                        <AnimatePresence>
+                            {activeIndex === index && (
+                                <motion.div 
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: 'auto' }}
+                                    exit={{ opacity: 0, height: 0 }}
+                                    className={styles["experience-body"]}
+                                >
+                                    {exp.description.map((desc, i) => (
+                                        <p key={i} className="mb-2">{desc}</p>
+                                    ))}
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </div>
                 ))}
             </div>
