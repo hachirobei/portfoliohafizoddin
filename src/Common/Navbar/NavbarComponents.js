@@ -1,110 +1,133 @@
-import React, { useState } from "react";
-import { LogoComponents } from "../../assets/icons"; 
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { LogoComponents } from "../../assets/icons";
 
-const NavbarComponents = ({homeRef,aboutRef,experienceRef,educationRef, skillRef, projectRef}) => {
+const NavbarComponents = ({ homeRef, aboutRef, experienceRef, educationRef, skillRef }) => {
+  const [activeSection, setActiveSection] = useState('home');
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-    const [activeSection,setActiveSection] = useState('home');
-    
-    const [isCollapsed, setIsCollapsed] = useState(true);
+  // Handle scroll effect for glassmorphism
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-    const toggleNavbar = () => {
-        setIsCollapsed(prevState => !prevState);
+  const scrollToSection = (ref, section) => {
+    setActiveSection(section);
+    setIsMobileMenuOpen(false);
+    if (ref && ref.current) {
+      const yOffset = -80; // Offset for fixed header
+      const y = ref.current.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
     }
+  };
 
-    const scrollToHome = () => {
-        setActiveSection('home');
+  const navLinks = [
+    { name: 'Home', ref: homeRef, id: 'home' },
+    { name: 'About', ref: aboutRef, id: 'about' },
+    { name: 'Skills', ref: skillRef, id: 'skill' },
+    { name: 'Experience', ref: experienceRef, id: 'experience' },
+    { name: 'Education', ref: educationRef, id: 'education' },
+  ];
 
-        homeRef.current.scrollIntoView({
-            behavior: 'smooth'
-        })
-    };
+  return (
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'glass-nav py-3' : 'bg-transparent py-5'}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center">
+          {/* Logo */}
+          <div 
+            className="flex items-center cursor-pointer group" 
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            <motion.div 
+              whileHover={{ rotate: 180 }}
+              transition={{ duration: 0.5 }}
+            >
+              <LogoComponents fill="#fbbf24" width="40" height="40" />
+            </motion.div>
+            <span className="ml-3 text-xl font-bold text-white tracking-wide group-hover:text-primary transition-colors">
+              Hafizoddin<span className="text-primary">.dev</span>
+            </span>
+          </div>
 
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            {navLinks.map((link) => (
+              <button
+                key={link.id}
+                onClick={() => scrollToSection(link.ref, link.id)}
+                className={`text-sm font-medium transition-colors relative group ${
+                  activeSection === link.id ? 'text-primary' : 'text-gray-300 hover:text-white'
+                }`}
+              >
+                {link.name}
+                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full ${activeSection === link.id ? 'w-full' : ''}`}></span>
+              </button>
+            ))}
+            
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              href="https://www.linkedin.com/in/muhammad-hafizoddin-roslan-538a67bb/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-5 py-2 rounded-full bg-gradient-to-r from-primary to-orange-500 text-black font-bold text-sm shadow-lg shadow-orange-500/20 hover:shadow-orange-500/40 transition-shadow"
+            >
+              Let's Talk
+            </motion.a>
+          </div>
 
-    const scrollToAbout = () => {
-        setActiveSection('about');
-        
-        aboutRef.current.scrollIntoView({
-            behavior: 'smooth'
-        });
-    };
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center">
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-gray-300 hover:text-white focus:outline-none"
+            >
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {isMobileMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
 
-    const scrollToExperience = () => {
-        setActiveSection('experience');
-        
-        experienceRef.current.scrollIntoView({
-            behavior: 'smooth'
-        });
-    };
-
-
-    const scrollToEducation = () => {
-        setActiveSection('education');
-        
-        educationRef.current.scrollIntoView({
-            behavior: 'smooth'
-        });
-    };
-
-    const scrollToSkill = () => {
-        setActiveSection('skill');
-        
-        skillRef.current.scrollIntoView({
-            behavior: 'smooth'
-        });
-    };
-
-    const scrollToProject = () => {
-        setActiveSection('project');
-        
-        projectRef.current.scrollIntoView({
-            behavior: 'smooth'
-        });
-    };
-
-
-
-
-    return (
-        <nav className="bg-white border-gray-200 dark:bg-neutral-950">
-            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <a href="https://www.hafizoddin.com/" className="flex items-center">
-                    <LogoComponents fill="#FCD34D"/>
-                    <span className="self-center text-2xl font-semibold whitespace-nowrap pl-1.5 md-pd dark:text-white">Hafizoddin</span>
-                </a>
-                <div className="flex md:order-2">
-                    <button onClick={toggleNavbar} data-collapse-toggle="navbar-cta" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-cta" aria-expanded="false">
-                        <span className="sr-only">Open main menu</span>
-                        <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
-                        </svg>
-                    </button>
-                </div>
-                
-                <div className={`${isCollapsed ? 'hidden' : ''} items-center justify-between w-full md:flex md:w-auto md:order-1`} id="navbar-cta">
-                    <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-neutral-950 md:dark:bg-neutral-950">
-                        <li>
-                            <a href="/" onClick={(e) => { e.preventDefault(); scrollToHome(); }} className={`block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-amber-300 md:bg-transparent md:p-0 md:hover:dark:text-amber-300 md:dark:hover:dark:text-amber-300 dark:text-white dark:hover:text-white md:dark:hover:bg-transparent ${activeSection === 'home' ? ' md:dark:text-amber-300 ' : 'text-gray-900 hover:bg-amber-300'}`}>Home</a>
-                        </li>
-                        <li>
-                            <a href="/" onClick={(e) => { e.preventDefault(); scrollToAbout(); }} className={`block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-amber-300 md:bg-transparent md:p-0 md:hover:dark:text-amber-300 md:dark:hover:dark:text-amber-300 dark:text-white dark:hover:text-white md:dark:hover:bg-transparent ${activeSection === 'about' ? 'md:dark:text-amber-300' : 'text-gray-900 hover:bg-amber-300'}`}>About</a>
-                        </li>
-                        <li>
-                            <a href="/" onClick={(e) => { e.preventDefault(); scrollToSkill(); }} className={`block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-amber-300 md:bg-transparent md:p-0 md:hover:dark:text-amber-300 md:dark:hover:dark:text-amber-300 dark:text-white dark:hover:text-white md:dark:hover:bg-transparent ${activeSection === 'skill' ? 'md:dark:text-amber-300' : 'text-gray-900 hover:bg-amber-300'}`}>Skill</a>
-                        </li>
-                        <li>
-                            <a href="/" onClick={(e) => { e.preventDefault(); scrollToExperience(); }} className={`block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-amber-300 md:bg-transparent md:p-0 md:hover:dark:text-amber-300 md:dark:hover:dark:text-amber-300 dark:text-white dark:hover:text-white md:dark:hover:bg-transparent ${activeSection === 'experience' ? 'md:dark:text-amber-300' : 'text-gray-900 hover:bg-amber-300'}`}>Experience</a>
-                        </li>
-                        <li>
-                            <a href="/" onClick={(e) => { e.preventDefault(); scrollToEducation(); }} className={`block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-amber-300 md:bg-transparent md:p-0 md:hover:dark:text-amber-300 md:dark:hover:dark:text-amber-300 dark:text-white dark:hover:text-white md:dark:hover:bg-transparent ${activeSection === 'education' ? 'md:dark:text-amber-300' : 'text-gray-900 hover:bg-amber-300'}`}>Education</a>
-                        </li>
-                        <li>
-                            <a href="/" onClick={(e) => { e.preventDefault(); scrollToProject(); }} className={`block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-amber-300 md:bg-transparent md:p-0 md:hover:dark:text-amber-300 md:dark:hover:dark:text-amber-300 dark:text-white dark:hover:text-white md:dark:hover:bg-transparent ${activeSection === 'project' ? 'md:dark:text-amber-300' : 'text-gray-900 hover:bg-amber-300'}`}>Project</a>
-                        </li>
-                    </ul>
-                </div>
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden glass-nav border-t border-gray-800 overflow-hidden"
+          >
+            <div className="px-4 pt-2 pb-6 space-y-2">
+              {navLinks.map((link) => (
+                <button
+                  key={link.id}
+                  onClick={() => scrollToSection(link.ref, link.id)}
+                  className={`block w-full text-left px-3 py-3 rounded-md text-base font-medium ${
+                    activeSection === link.id 
+                      ? 'bg-surface text-primary' 
+                      : 'text-gray-300 hover:bg-surface hover:text-white'
+                  }`}
+                >
+                  {link.name}
+                </button>
+              ))}
             </div>
-        </nav>
-    );
-}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
+  );
+};
 
 export default NavbarComponents;

@@ -1,47 +1,85 @@
 import React from 'react';
 import { projectData } from './Data/projectData';
-import styles from './project.module.css';
 import { motion } from 'framer-motion';
+import { FaExternalLinkAlt, FaGithub, FaFolder } from 'react-icons/fa';
 
 function ProjectComponents() {
-    // Function to handle click (e.g., open modal or expand section)
-    const handleProjectClick = (project) => {
-        // Implement modal opening or expanding section logic
-        console.log("Project clicked:", project.name);
-    };
-
     return (
-        <div className="p-2 py-2 px-10 pb-10">
-            <h2 className="text-5xl text-center py-2 text-amber-300 font-medium dark:text-amber-400 md:text-6xl">
-                Projects
-            </h2>
-            <div className={styles["project-section"]}>
-                <div className="p-5">
-                    <div className="flex flex-wrap -mx-2">
-                        {projectData.map((project, index) => (
-                            <motion.div 
-                                key={index} 
-                                className="w-full sm:w-1/2 lg:w-1/3 px-2 mb-6" 
-                                whileHover={{ scale: 1.05 }} 
-                                transition={{ type: "spring", stiffness: 300 }}
-                                onClick={() => handleProjectClick(project)}
-                            >
-                                <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                                    <div className="px-6 py-4">
-                                        <h3 className="text-xl font-semibold mb-3 text-orange-500">{project.name}</h3>
-                                        <p className="text-gray-700 text-base mb-2">{project.duration}</p>
-                                        <p className="text-gray-600 text-sm mb-2">{project.associatedWith}</p>
-                                        <p className="text-gray-700 text-sm">{project.description}</p>
-                                    </div>
-                                    {/* Optional: Add image/media here */}
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
+        <section className="py-24 bg-surface relative overflow-hidden">
+             <div className="absolute left-0 bottom-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+
+            <div className="max-w-7xl mx-auto px-6 relative z-10">
+                <div className="text-center mb-16">
+                    <h2 className="text-primary font-medium tracking-widest uppercase mb-3">My Work</h2>
+                    <h3 className="text-4xl md:text-5xl font-bold text-white">
+                        Featured <span className="text-gradient">Projects</span>
+                    </h3>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {projectData && projectData.length > 0 ? (
+                        projectData.map((project, index) => (
+                            <ProjectCard key={index} project={project} index={index} />
+                        ))
+                    ) : (
+                        <div className="col-span-full text-center py-20">
+                            <p className="text-gray-400 text-lg">More projects coming soon...</p>
+                        </div>
+                    )}
                 </div>
             </div>
-        </div>
+        </section>
     );
 }
+
+const ProjectCard = ({ project, index }) => {
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.1 }}
+            className="glass rounded-2xl overflow-hidden border border-gray-700/50 hover:border-primary/50 transition-all duration-300 flex flex-col h-full group"
+        >
+            <div className="p-8 flex flex-col flex-grow">
+                <div className="flex justify-between items-start mb-6">
+                    <div className="text-primary text-4xl">
+                        <FaFolder />
+                    </div>
+                    <div className="flex gap-4 text-gray-400">
+                        {project.githubLink && (
+                            <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors text-xl">
+                                <FaGithub />
+                            </a>
+                        )}
+                        {project.link && (
+                            <a href={project.link} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors text-xl">
+                                <FaExternalLinkAlt />
+                            </a>
+                        )}
+                    </div>
+                </div>
+
+                <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-primary transition-colors">
+                    {project.name}
+                </h3>
+                
+                <p className="text-gray-400 text-sm mb-4 line-clamp-3 flex-grow">
+                    {project.description}
+                </p>
+
+                {project.techStack && (
+                    <div className="flex flex-wrap gap-2 mt-auto pt-4">
+                        {project.techStack.map((tech, i) => (
+                            <span key={i} className="text-xs font-mono text-secondary">
+                                {tech}
+                            </span>
+                        ))}
+                    </div>
+                )}
+            </div>
+        </motion.div>
+    );
+};
 
 export default ProjectComponents;

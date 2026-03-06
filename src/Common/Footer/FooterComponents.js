@@ -2,13 +2,25 @@ import React from "react";
 
 const FooterComponents = () => {
     return (
-        <div>
-            <footer class="fixed bottom-0 text-center left-0 z-20 w-full p-4 bg-white border-t border-gray-200 shadow md:items-center md:justify-between dark:bg-neutral-950 dark:border-neutral-950">
-            <span class="text-sm text-center dark:text-amber-300">© 2023 <a href="www.hafizoddin.com.my" class="hover:underline">Hafizoddin™</a>. All Rights Reserved.</span>
-            </footer>
-        </div>
+        <footer className="py-12 bg-background border-t border-gray-800 relative z-10">
+            <div className="max-w-7xl mx-auto px-6 text-center">
+                <h2 className="text-2xl font-bold text-white mb-6">
+                    Hafizoddin<span className="text-primary">.dev</span>
+                </h2>
+                
+                <div className="flex justify-center gap-8 mb-8 text-sm font-medium text-gray-400">
+                    <a href="#" className="hover:text-primary transition-colors">Home</a>
+                    <a href="#" className="hover:text-primary transition-colors">About</a>
+                    <a href="#" className="hover:text-primary transition-colors">Experience</a>
+                    <a href="#" className="hover:text-primary transition-colors">Contact</a>
+                </div>
+
+                <p className="text-gray-500 text-sm">
+                    © {new Date().getFullYear()} Muhammad Hafizoddin. Built with <span className="text-accent">React</span> & <span className="text-secondary">Tailwind</span>.
+                </p>
+            </div>
+        </footer>
     );
 }
 
 export default FooterComponents;
-
