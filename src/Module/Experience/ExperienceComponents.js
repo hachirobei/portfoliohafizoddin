@@ -1,96 +1,54 @@
-import React, { useState } from 'react';
-import { experiencesData } from "./Data/ExperienceData";
-import styles from './experience.module.css';
-import { FaCalendar, FaMapMarkerAlt, FaBriefcase, FaAngleDown } from 'react-icons/fa';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { experienceData } from "../../Data/experienceData";
 
-function calculateDuration(startDate, endDate) {
-    const start = new Date(startDate);
-    const end = endDate === "Present" ? new Date() : new Date(endDate);
+const ExperienceCard = ({ exp, index }) => {
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
 
-    let years = end.getFullYear() - start.getFullYear();
-    let months = end.getMonth() - start.getMonth();
-    let days = end.getDate() - start.getDate();
-
-    if (start.getDate() === 1 && days > 0) {
-        months += 1;
-        days = 0;
-    } else if (days < 0) {
-        months -= 1;
-        days += new Date(start.getFullYear(), start.getMonth() + 1, 0).getDate(); // Adding number of days in previous month
-    }
-
-    if (months < 0) {
-        years -= 1;
-        months += 12;
-    }
-
-    let result = "";
-    if (years > 0) result += `${years} yr${years > 1 ? "s" : ""} `;
-    if (months > 0) result += `${months} mo${months > 1 ? "s" : ""}`;
-
-    return result.trim();
-}
-
-
-function ExperienceComponents() {
-    const [activeIndex, setActiveIndex] = useState(null);
-
-    const toggleDetails = (index) => {
-        setActiveIndex(index === activeIndex ? null : index);
-    };
-
-    return (
-        <div className="p-2 py-2 px-10 pb-10">
-            <h2 className="text-5xl text-center py-2 text-amber-300 font-medium dark:text-amber-400 md:text-6xl">
-                Experience
-            </h2>
-            <div className={styles["experience-section"]}>
-                {experiencesData.map((exp, index) => (
-                    <div key={index} className={styles["experience-item"]}>
-                        <div 
-                            className={`${styles["experience-header"]} cursor-pointer shadow-md hover:shadow-lg transition-shadow duration-300`} 
-                            onClick={() => toggleDetails(index)}
-                        >
-                            <h3 className="text-2xl mb-3">{exp.title}</h3>
-                            <div className="flex items-center mb-2">
-                                <FaBriefcase className="mr-2 text-amber-300" />
-                                {exp.company}
-                            </div>
-                            <div className="flex items-center mb-2">
-                                <FaMapMarkerAlt className="mr-2 text-amber-300" />
-                                {exp.location}
-                            </div>
-                            <div className="flex items-center mb-2">
-                                <FaCalendar className="mr-2 text-amber-300" />
-                                {calculateDuration(exp.startDate, exp.endDate)}
-                            </div>
-                            <motion.div 
-                                className={styles.icon} 
-                                animate={{ rotate: activeIndex === index ? 180 : 0 }}
-                            >
-                                <FaAngleDown />
-                            </motion.div>
-                        </div>
-                        <AnimatePresence>
-                            {activeIndex === index && (
-                                <motion.div 
-                                    initial={{ opacity: 0, height: 0 }}
-                                    animate={{ opacity: 1, height: 'auto' }}
-                                    exit={{ opacity: 0, height: 0 }}
-                                    className={styles["experience-body"]}
-                                >
-                                    {exp.description.map((desc, i) => (
-                                        <p key={i} className="mb-2">{desc}</p>
-                                    ))}
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </div>
-                ))}
-            </div>
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+      animate={inView ? { opacity: 1, x: 0 } : {}}
+      transition={{ duration: 0.6, delay: index * 0.2 }}
+      className="mb-8 bg-white dark:bg-gray-800 rounded-xl shadow-xl overflow-hidden border-l-4 border-amber-400 p-6"
+    >
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+        <div>
+          <h3 className="text-2xl font-bold text-gray-800 dark:text-white">{exp.title}</h3>
+          <p className="text-amber-500 font-semibold">{exp.company}</p>
         </div>
-    );
-}
+        <div className="text-right mt-2 md:mt-0 text-sm text-gray-500 dark:text-gray-400">
+          <p>{exp.period}</p>
+          <p>{exp.location}</p>
+        </div>
+      </div>
+      <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+        {exp.highlights.map((item, idx) => (
+          <li key={idx} className="leading-relaxed">{item}</li>
+        ))}
+      </ul>
+    </motion.div>
+  );
+};
+
+const ExperienceComponents = () => {
+  return (
+    <div className="py-20 px-10 max-w-5xl mx-auto">
+      <h2 className="text-5xl text-center py-10 text-amber-300 font-bold md:text-6xl">
+        Experience
+      </h2>
+      <div className="mt-10">
+        {experienceData.map((exp, index) => (
+          <ExperienceCard key={index} exp={exp} index={index} />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default ExperienceComponents;
