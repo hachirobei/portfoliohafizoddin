@@ -9,7 +9,7 @@ function App() {
   const experienceRef = useRef(null);
   const educationRef = useRef(null);
   const skillRef = useRef(null);
-  const projectRef = useRef(null); // Assuming ProjectComponents is implemented or will be removed
+  const projectRef = useRef(null);
 
   return (
     <div className="bg-background min-h-screen text-white">
@@ -22,28 +22,27 @@ function App() {
       />
       
       <main>
-        <div ref={homeRef}>
+        <div ref={homeRef} id="home">
           <HomeComponents />
         </div>
         
-        <div ref={aboutRef}>
+        <div ref={aboutRef} id="about">
           <AboutComponents />
         </div>
         
-        <div ref={skillRef}>
+        <div ref={skillRef} id="skill">
           <SkillComponents />
         </div>
         
-        <div ref={experienceRef}>
+        <div ref={experienceRef} id="experience">
           <ExperienceComponents />
         </div>
         
-        <div ref={educationRef}>
+        <div ref={educationRef} id="education">
           <EducationComponents />
         </div>
 
-        {/* Uncomment if ProjectComponents is ready */}
-        <div ref={projectRef}>
+        <div ref={projectRef} id="project">
            <ProjectComponents />
         </div>
       </main>

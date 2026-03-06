@@ -9,10 +9,10 @@ const FooterComponents = () => {
                 </h2>
                 
                 <div className="flex justify-center gap-8 mb-8 text-sm font-medium text-gray-400">
-                    <a href="#" className="hover:text-primary transition-colors">Home</a>
-                    <a href="#" className="hover:text-primary transition-colors">About</a>
-                    <a href="#" className="hover:text-primary transition-colors">Experience</a>
-                    <a href="#" className="hover:text-primary transition-colors">Contact</a>
+                    <a href="#home" className="hover:text-primary transition-colors">Home</a>
+                    <a href="#about" className="hover:text-primary transition-colors">About</a>
+                    <a href="#experience" className="hover:text-primary transition-colors">Experience</a>
+                    <a href="#about" className="hover:text-primary transition-colors">Contact</a>
                 </div>
 
                 <p className="text-gray-500 text-sm">
